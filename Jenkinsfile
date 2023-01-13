@@ -34,7 +34,7 @@ pipeline {
         stage('Deploy image') {
             steps{
                 script{ 
-                    docker.withRegistry(http://192.168.78.88:8081/repository/Maven-nexus-repo/) {
+                    docker.withRegistry("https://"+registry,"ecr:us-east-1:"+registryCredential) {
                         dockerImage.push()
                     }
                 }
@@ -42,4 +42,3 @@ pipeline {
         }  
     }
 }
-
