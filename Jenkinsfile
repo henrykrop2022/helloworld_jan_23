@@ -34,9 +34,8 @@ pipeline {
         stage('Deploy image') {
             steps{
                 script{ 
-                    docker.withRegistry(ecrurl, ecrcredentials) {     
-                       dockerImage.push("$BUILD_NUMBER")
-                          dockerImage.push('latest')
+                    docker.withRegistry("https://"+registry,"ecr:us-east-1:"+registryCredential) {
+                        dockerImage.push('latest')
                     }
                 }
             }
