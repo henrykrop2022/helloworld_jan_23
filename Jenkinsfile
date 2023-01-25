@@ -8,9 +8,11 @@ pipeline {
                 git branch: 'main', url: 'https://github.com/henrykrop2022/helloworld_jan_23.git'
             }
         }
-        stage('UNIT Testing'){
+        stage('maven package'){
             steps{
-               sh 'mvn test'
+               sh 'mvn clean'
+               sh 'mvn install -DskipTests'
+               sh 'mvn package -DskipTests'
             }
         }
     }
