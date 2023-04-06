@@ -1,41 +1,25 @@
 pipeline {
+  agent any
 
-    agent any
-     tools {
-  maven 'M2_HOME'
-     }
+  environment {
+    KUBECONFIG = '/path/to/your/kubeconfig'
+  }
 
-    stages{
-        stage('Git Checkout'){
-            steps{
-                git branch: 'main', url: 'https://github.com/henrykrop2022/helloworld_jan_23.git'
-            }
+  stages {
+    stage('Check connectivity') {
+      steps {
+        withKubeConfig(credentialsId: 'eks_credential', kubeconfigFileVariable: 'KUBECONFIG') {
+          sh 'kubectl get nodes'
         }
-        stage('UNIT Testing'){
-            steps{
-               sh 'mvn test'
-               
-            }
-        }
-        stage('Integration Testing'){
-            steps{
-               sh 'mvn verify -DskipUnitTests'
-               
-            }
-        }
-        stage('Maven Build'){
-            steps {
-                sh 'mvn clean install'
-            }
-        }
-        stage ('SonarQube analysis'){
-            steps {
-                script{
-                withSonarQubeEnv(credentialsId: 'sonar-api-key') {
-                    sh 'mvn clean package sonar:sonar'
-                }
-               }
-            }
-        }
+      }
     }
+
+    stage('Deploy') {
+      steps {
+        withKubeConfig(credentialsId: 'eks_credential', kubeconfigFileVariable: 'KUBECONFIG') {
+          sh 'kubectl apply -f deployment.yaml'
+        }
+      }
+    }
+  }
 }
