@@ -15,4 +15,17 @@ stages{
             git branch: 'main', url: 'https://github.com/henrykrop2022/helloworld_jan_23.git'
         }
     }
+    stages{
+        stage('Code Build'){
+            steps{
+                sh 'mvn clean package'
+            }
+        }
+        stage{
+            steps('Test'){
+                sh 'mvn test'
+            }
+        }
+    }
+    
 }
