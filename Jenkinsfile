@@ -21,9 +21,16 @@ stages{
                 sh 'mvn clean package'
             }
         }
-        stage{
-            steps('Test'){
+        stage('Test'){
+            steps{
                 sh 'mvn test'
+            }
+        }
+        stage('Build Image'){
+            steps{
+                script{
+                    dockerImage = docker.build registry +":$BUILD_NUMBER"
+                }
             }
         }
     }
