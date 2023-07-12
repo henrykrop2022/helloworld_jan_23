@@ -3,7 +3,10 @@ pipeline{
     tools{
         maven 'M2_HOME'
     }
-
+    environment {
+        imagename = "henryrop/helloworld_jan_23"
+         registryCredential = 'henryrop-dockerhub'
+    }
     stages{
         stage('check out'){
             steps{
