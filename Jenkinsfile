@@ -8,7 +8,8 @@ pipeline{
         stage('check out'){
             steps{
                 git branch: 'main', url: 'https://github.com/henrykrop2022/helloworld_jan_23.git'
-            }
+                }
+            }   
         }
         stage('Code Build'){
                 steps{
@@ -26,16 +27,6 @@ pipeline{
                     dockerImage = docker.build registry + ":$BUILD_NUMBER"
                 }
             }
-        }  
-            // stage('Deploy Image'){
-            //     steps{
-            //         script{
-            //             docker.withRegistry("https://"+registry,"ecr:us-east-1:"+registryCredential) {
-            //                 dockerImage.push()
-            //             }
-            //         }
-            //     }
-            // }
-        }
+        }     
     }   
 
