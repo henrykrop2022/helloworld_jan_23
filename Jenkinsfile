@@ -27,7 +27,7 @@ pipeline{
             steps{
                 script{
                      withSonarQubeEnv(credentialsId: 'hello-world-tokenID') {
-                sh 'mvn clean verify sonar:sonar'
+                sh 'mvn sonar:sonar -Dsonar.token=myAuthenticationToken'
                      }
                  }
              }
