@@ -22,7 +22,16 @@ pipeline{
                 steps{
                     sh 'mvn test'
             }
-        }      
+        } 
+        stage('Sonar Analysis'){
+            steps{
+                script{
+                     withSonarQubeEnv(credentialsId: 'geolocation-24-sonarID') {
+                sh 'mvn sonar:sonar'
+                     }
+                 }
+             }
+         }     
         stage('Build Image'){
             steps{
                 script{
