@@ -26,7 +26,7 @@ pipeline{
         stage('Sonar Analysis'){
             steps{
                 script{
-                     withSonarQubeEnv(credentialsId: 'geolocation-24-sonarID') {
+                     withSonarQubeEnv(credentialsId: 'hello-world-tokenID') {
                 sh 'mvn sonar:sonar'
                      }
                  }
