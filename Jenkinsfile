@@ -10,7 +10,6 @@ pipeline{
                 git branch: 'main', url: 'https://github.com/henrykrop2022/helloworld_jan_23.git'
                 }
             }   
-        }
         stage('Code Build'){
                 steps{
                     sh 'mvn clean package'
@@ -28,5 +27,6 @@ pipeline{
                 }
             }
         }     
-    }   
+    }  
+} 
 
