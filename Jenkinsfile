@@ -4,11 +4,6 @@ pipeline{
         maven 'M2_HOME'
     }
 }
-environment {
-    registry= '880385147960.dkr.ecr.us-east-1.amazonaws.com/hello_world_23'
-    registryCredential = 'aws_jenkins'
-    dockerimage = ''
-}
 stages{
     stage('check out'){
         steps{
